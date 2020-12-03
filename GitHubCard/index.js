@@ -1,8 +1,19 @@
+import axios from 'axios'
+
 /*
   STEP 1: using axios, send a GET request to the following URL
     (replacing the placeholder with your Github name):
     https://api.github.com/users/<your name>
 */
+
+axios
+  .get('https://api.github.com/users/bdiaz12345')
+  .then(res => {
+    console.log(res)
+  })
+  .catch(err => {
+    console.log('err')
+  })
 
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
@@ -49,6 +60,32 @@ const followersArray = [];
       </div>
     </div>
 */
+
+const cardMaker = ({ image, name, username, location, profileUrl, followers, following, bio }) => {
+  const card = document.createElement('div');
+  const img = document.createElement('img');
+  const cardInfo = document.createElement('div');
+  const Name = document.createElement('h3');
+  const Username = document.createElement('p');
+  const Location = document.createElement('p');
+  const Profile = document.createElement('p');
+  const url = document.createElement('a');
+  const Followers = document.createElement('p');
+  const Following = document.createElement('p');
+  const Bio = document.createElement('p');
+
+  Profile.appendChild(url);
+  cardInfo.appendChild(Name);
+  cardInfo.appendChild(Username);
+  cardInfo.appendChild(Location);
+  cardInfo.appendChild(Profile);
+  cardInfo.appendChild(Followers);
+  cardInfo.appendChild(Following);
+  cardInfo.appendChild(Bio);
+  card.appendChild(img);
+  card.appendChild(cardInfo);
+
+}
 
 /*
   List of LS Instructors Github username's:
