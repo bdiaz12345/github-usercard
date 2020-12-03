@@ -39,7 +39,24 @@ axios
     user, and adding that card to the DOM.
 */
 
-const followersArray = [];
+const followersArray = ['tetondan', 'dustinmyers', 'justsml', 'luishrd', 'bigknell'];
+
+followersArray.forEach((person) => {
+  axios
+    .get(`https://api.github.com/users/${person}`)
+    .then(res => {
+      const cards = document.querySelector('.cards');
+      const image = res.data.avatar_url;
+      const name = res.data.name;
+      const username = res.data.login;
+      const location = res.data.location;
+      const profileUrl = res.data.html_url;
+      const followers = res.data.followers;
+      const following = res.data.following;
+      const bio = res.data.bio;
+      cards.appendChild(cardMaker({ image, name, username, location, profileUrl, followers, following, bio }));
+    })
+})
 
 /*
   STEP 3: Create a function that accepts a single object as its only argument.
@@ -85,7 +102,39 @@ const cardMaker = ({ image, name, username, location, profileUrl, followers, fol
   card.appendChild(img);
   card.appendChild(cardInfo);
 
+  card.classList.add('card');
+  img.src = image;
+  cardInfo.classList.add('card-info');
+  Name.classList.add('name');
+  Name.textContent = name;
+  Username.classList.add('username');
+  Username.textContent = username;
+  Location.textContent = `Location: ${location}`;
+  Profile.textContent = 'Profile: ';
+  url.href = profileUrl;
+  Followers.textContent = `Followers: ${followers}`;
+  Following.textContent = `Following: ${following}`;
+  Bio.textContent = `Bio: ${bio}`;
+
+  return card;
+
 }
+
+axios
+  .get('https://api.github.com/users/bdiaz12345')
+  .then(res => {
+    const cards = document.querySelector('.cards');
+    const image = res.data.avatar_url;
+    const name = res.data.name;
+    const username = res.data.login;
+    const location = res.data.location;
+    const profileUrl = res.data.html_url;
+    const followers = res.data.followers;
+    const following = res.data.following;
+    const bio = res.data.bio;
+    cards.appendChild(cardMaker({ image, name, username, location, profileUrl, followers, following, bio }));
+  })
+  .catch(err => {console.log('err')})
 
 /*
   List of LS Instructors Github username's:
